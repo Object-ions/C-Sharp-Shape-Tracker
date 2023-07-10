@@ -1,5 +1,6 @@
 using System;
 using ShapeTracker.Models;
+using System.Collections.Generic; 
 
 namespace ShapeTracker
 {
@@ -18,7 +19,7 @@ namespace ShapeTracker
       string stringNumber3 = Console.ReadLine();  
       int length1 = int.Parse(stringNumber1);  
       int length2 = int.Parse(stringNumber2);  
-      int length3 = int.Parse(stringNumber3);  
+      int length3 = int.Parse(stringNumber3); 
       Triangle tri = new Triangle(length1, length2, length3);
       ConfirmOrEditTriangle(tri);
     }
@@ -57,17 +58,39 @@ namespace ShapeTracker
       Console.WriteLine("-----------------------------------------");
       Console.WriteLine("Your result is: " + result + ".");
       Console.WriteLine("-----------------------------------------");
-      Console.WriteLine("What's next?");
-      Console.WriteLine("Would you like to check a new triangle (new)?");
-      Console.WriteLine("Please enter 'new' to check the type of a new triangle. To exit, enter any key.");
-      string userResponse = Console.ReadLine(); 
-      if (userResponse == "new" || userResponse == "New")
+      Console.WriteLine("Here's a list of the triangles you have entered:");
+      List<Triangle> allTriangles = Triangle.GetAll();
+        Console.WriteLine("*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*");
+        foreach (Triangle element in allTriangles)
+        {
+          Console.WriteLine($"Side one of the triangle: {element.Side1}");
+          Console.WriteLine($"Side two of the triangle: {element.Side2}");
+          Console.WriteLine($"Side three of the triangle: {element.GetSide3()}");
+          Console.WriteLine("-----------------------------------------");
+        }
+      Console.WriteLine("Would you like to delete all the information you currently have stored?");
+      Console.WriteLine("Please enter 'yes' to delete the information or otherwise, please enter any key to continue");
+      string firstResponse = Console.ReadLine();
+      if (firstResponse == "yes" || firstResponse == "Yes" || firstResponse == "y")
       {
+        Triangle.ClearAll();
         Main();
       }
       else
       {
-        Console.WriteLine("Goodbye!");
+        Console.WriteLine("What's next?");
+        Console.WriteLine("Would you like to check a new triangle (new)?");
+        Console.WriteLine("Would you like to see all of your triangles that you have entered currently?");
+        Console.WriteLine("Please enter 'new' to check the type of a new triangle. Please enter 'list' to see a list of your triangles you have currently entered. To exit, enter any key.");
+        string userResponse = Console.ReadLine(); 
+        if (userResponse == "new" || userResponse == "New")
+        {
+          Main();
+        }      
+        else
+        {
+          Console.WriteLine("Goodbye!");
+        }
       }
     }
   }
