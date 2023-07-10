@@ -25,11 +25,18 @@ namespace ShapeTracker.Tests
             Assert.AreEqual(4, newRectangle.SidesA);
         }
 
-         [TestMethod]
+        [TestMethod]
         public void GetSideB_ReturnSide1_Int()
         {
             Rectangle newRectangle = new Rectangle(4, 3);
             Assert.AreEqual(3, newRectangle.SidesB);
+        }
+
+        [TestMethod]
+        public void GetArea_ReturnTheAreaOfRectangle_Int()
+        {
+            Rectangle newRectangle = new Rectangle(4, 3);
+            Assert.AreEqual(12, newRectangle.GetArea());
         }
 
 
